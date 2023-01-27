@@ -12,13 +12,15 @@ export const Header = () => {
 
 	return (
 		<div className="header">
-			<Typography.Title tag="h1" color="accent" view="small" className="a-store" onClick={handleClick}>
+			<Typography.Title tag="h1" color="accent" view="small" onClick={handleClick}>
 				A-Store
 			</Typography.Title>
-			<ListMIcon />
-			<Typography.Title tag="h1" view="small">
-				меню
-			</Typography.Title>
+			<div className="menu">
+				<ListMIcon />
+				<Typography.Title tag="h2" view="small">
+					меню
+				</Typography.Title>
+			</div>
 		</div>
 	);
 };
