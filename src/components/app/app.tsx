@@ -4,8 +4,8 @@ import { Routes, Route, Link } from "react-router-dom";
 import { Homepage } from "pages/homepage";
 import { Cartpage } from "pages/cartpage";
 import { ContactUspage } from "pages/contact-uspage";
-import { MadeInAflapage } from "pages/made-in-alfa";
-import { OwnDesignpage } from "pages/own-design";
+import { MadeInAflapage } from "pages/made-in-alfapage";
+import { OwnDesignpage } from "pages/own-designpage";
 
 export const App = () => (
 	<div className="app">
