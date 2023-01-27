@@ -1,0 +1,9 @@
+.header {
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
+}
+
+.a-store {
+	margin-right: auto;
+}
