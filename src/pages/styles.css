@@ -1,0 +1,35 @@
+.homepage {
+	display: flex;
+	justify-content: space-around;
+	cursor: pointer;
+}
+
+.homepage-block {
+	position: relative;
+}
+
+.homepage > div > img {
+	width: 100%;
+	object-fit: cover;
+	object-position: top;
+}
+
+.homepage > div > img:hover {
+	transition: 0.5s;
+	filter: brightness(80%);
+}
+
+.homepage-block-text {
+	position: absolute;
+	top: 1%;
+	left: 1%;
+	max-width: 100%;
+	pointer-events: none;
+}
+
+@media (orientation: portrait) {
+	.homepage {
+		display: flex;
+		flex-direction: column;
+	}
+}
