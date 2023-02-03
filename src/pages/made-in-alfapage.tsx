@@ -25,7 +25,7 @@ export const MadeInAflapage = () => {
 					{products.map((product) => (
 						<ProductCard
 							key={product.id}
-							preview="https://static.tildacdn.com/stor6531-3139-4435-b365-653562306137/98058636.jpg"
+							preview={product.preview}
 							title={product.title}
 							price={product.price}
 							availability={product.availability}
