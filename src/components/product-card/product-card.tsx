@@ -11,7 +11,7 @@ type ProductCardType = {
 };
 
 export const ProductCard = ({ preview, title, price, availability }: ProductCardType) => {
-	const inStock = availability ? "в наличии" : "закончились";
+	const isInStock = availability ? "в наличии" : "закончились";
 
 	return (
 		<div className="product">
@@ -21,7 +21,7 @@ export const ProductCard = ({ preview, title, price, availability }: ProductCard
 			</Typography.Text>
 			<Amount value={price} minority={0} currency="RUB" bold="major" />
 			<Typography.Text view="primary-large" weight="bold">
-				{inStock}
+				{isInStock}
 			</Typography.Text>
 		</div>
 	);
