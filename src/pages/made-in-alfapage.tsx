@@ -5,6 +5,7 @@ import { Page } from "components/page";
 import { ProductCard } from "components/product-card";
 import "./styles.css";
 import data from "data/products.json";
+import { Link } from "react-router-dom";
 
 export const MadeInAflapage = () => {
 	const products = data.products;
@@ -23,13 +24,18 @@ export const MadeInAflapage = () => {
 				<Gap size="xl" />
 				<div className="products">
 					{products.map((product) => (
-						<ProductCard
+						<Link
+							to={`/made-in-alfa/${product.id}`}
+							style={{ textDecoration: "none", color: "inherit" }}
 							key={product.id}
-							preview={product.preview}
-							title={product.title}
-							price={product.price}
-							availability={product.availability}
-						/>
+						>
+							<ProductCard
+								preview={product.preview}
+								title={product.title}
+								price={product.price}
+								availability={product.availability}
+							/>
+						</Link>
 					))}
 				</div>
 			</div>
