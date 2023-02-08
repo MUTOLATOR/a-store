@@ -32,7 +32,7 @@ export const OwnDesignProductpage = () => {
 								className={index === currentImg ? "img-picker-active" : "img-picker"}
 								key={index}
 								src={img}
-								alt="123"
+								alt=""
 								onClick={() => handleClick(index)}
 							/>
 						))}
