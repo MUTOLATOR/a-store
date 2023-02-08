@@ -26,7 +26,7 @@ export const OwnDesignProductpage = () => {
 				<div className="product-imgs">
 					<img className="product-big-img" src={imgs[currentImg]} alt={title} />
 					<Gap size="xs" />
-					<div>
+					<div className="img-picker-block">
 						{images?.map((img, index) => (
 							<img
 								className={index === currentImg ? "img-picker-active" : "img-picker"}
