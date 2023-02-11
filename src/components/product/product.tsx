@@ -6,7 +6,7 @@ import { Button } from "@alfalab/core-components/button";
 import React, { useEffect, useState } from "react";
 import "./product.css";
 
-type ProductType = {
+export type ProductType = {
 	images: string[];
 	title: string;
 	price: number;
