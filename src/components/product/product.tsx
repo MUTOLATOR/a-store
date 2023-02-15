@@ -5,18 +5,7 @@ import { Select, SelectProps } from "@alfalab/core-components/select";
 import { Button } from "@alfalab/core-components/button";
 import React, { useEffect, useState } from "react";
 import "./product.css";
-
-export type ProductType = {
-	images: string[];
-	title: string;
-	price: number;
-	description: string;
-	availability: boolean;
-	colors?: string[];
-	sizes?: string[];
-	models?: string[];
-	stickerNumbers?: number[];
-};
+import { ProductType } from "types/product";
 
 export const Product = ({
 	images,
@@ -87,14 +76,10 @@ export const Product = ({
 
 	const handleClick = (i: number) => {
 		setCurrentImg(i);
-		if (i + 1 <= colorOptions.length) {
-			setSelectedColor(colorOptions[i]);
-		}
 	};
 
 	const handleChangeColor: SelectProps["onChange"] = ({ selected }) => {
 		setSelectedColor(selected);
-		setCurrentImg(parseInt(selected!.key) - 1);
 	};
 	const handleChangeSize: SelectProps["onChange"] = ({ selected }) => {
 		setSelectedSize(selected);
