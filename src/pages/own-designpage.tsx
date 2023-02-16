@@ -1,6 +1,6 @@
 import { Page } from "components/page";
 import "./styles.css";
-//import data from "data/groups.json";
+import data from "data/groups.json";
 import { Space } from "@alfalab/core-components/space";
 import { Typography } from "@alfalab/core-components/typography";
 import { Gap } from "@alfalab/core-components/gap";
@@ -8,12 +8,11 @@ import { ProductCard } from "components/product-card";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "store";
 import { useCallback, useEffect } from "react";
-import { aStoreActions, ownDesignProductsSelector } from "store/a-store";
+import { aStoreActions, hasErrorSelector, ownDesignProductsSelector } from "store/a-store";
 
 export const OwnDesignpage = () => {
-	//const groups = data.groups; пока оставлю на случай если с апи будет что-то не так
-
 	const dispatch = useAppDispatch();
+	const hasError = useAppSelector(hasErrorSelector);
 
 	const fetchProducts = useCallback(() => {
 		dispatch(aStoreActions.requestOwnDesign());
@@ -23,7 +22,10 @@ export const OwnDesignpage = () => {
 		fetchProducts();
 	}, [fetchProducts]);
 
-	const groups = useAppSelector(ownDesignProductsSelector);
+	let groups = useAppSelector(ownDesignProductsSelector);
+	if (hasError) {
+		groups = data.groups;
+	}
 
 	return (
 		<Page>
