@@ -27,11 +27,13 @@ export const MadeInAflaProductpage = () => {
 		product = data.products.find((product) => product.id === parseInt(productId as string)) as ProductType;
 	}
 
-	const { images, title, price, description, availability, colors, sizes, models } = product;
+	const { id, preview, images, title, price, description, availability, colors, sizes, models } = product;
 
 	return (
 		<Page>
 			<Product
+				id={id}
+				preview={preview}
 				images={images}
 				title={title}
 				price={price}

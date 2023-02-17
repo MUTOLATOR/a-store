@@ -27,11 +27,13 @@ export const OwnDesignProductpage = () => {
 		product = data.customProducts.find((product) => product.id === parseInt(productId as string)) as ProductType;
 	}
 
-	const { images, title, price, description, availability, colors, sizes, stickerNumbers } = product;
+	const { id, preview, images, title, price, description, availability, colors, sizes, stickerNumbers } = product;
 
 	return (
 		<Page>
 			<Product
+				id={id}
+				preview={preview}
 				images={images}
 				title={title}
 				price={price}

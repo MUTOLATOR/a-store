@@ -1,20 +1,23 @@
 import { CaseReducer, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { MadeInAlfaType, OwnDesignType, ProductType } from "types/product";
+import { CartType, MadeInAlfaType, OwnDesignType, ProductType } from "types/product";
 
 export type AStoreStateType = {
 	madeInAlfaProducts: MadeInAlfaType[];
 	ownDesignProducts: OwnDesignType[];
-	currentProductId: string;
 	currentProduct: ProductType;
 	isLoading: boolean;
 	hasError: boolean;
+	cart: CartType[];
+	amountInCart: number;
+	totalCost: number;
 };
 
 const initialState: AStoreStateType = {
 	madeInAlfaProducts: [],
 	ownDesignProducts: [],
-	currentProductId: "0",
 	currentProduct: {
+		id: 0,
+		preview: "",
 		images: [""],
 		title: "",
 		price: 0,
@@ -23,6 +26,9 @@ const initialState: AStoreStateType = {
 	},
 	isLoading: false,
 	hasError: false,
+	cart: [],
+	amountInCart: 0,
+	totalCost: 0,
 };
 
 const NAME = "a-store";
@@ -38,7 +44,7 @@ const requestOwnDesign: CaseReducer<AStoreStateType> = (state) => {
 };
 
 const requestProduct: CaseReducer<AStoreStateType, PayloadAction<string>> = (state, { payload }) => {
-	state.currentProductId = payload;
+	state.currentProduct.id = payload;
 	state.isLoading = true;
 	state.hasError = false;
 };
@@ -66,6 +72,46 @@ const failure: CaseReducer<AStoreStateType> = (state) => {
 	state.hasError = true;
 };
 
+const addToCart: CaseReducer<AStoreStateType, PayloadAction<CartType>> = (state, { payload }) => {
+	const product = state.cart.find(
+		(product) =>
+			product.productId === payload.productId &&
+			product.productOptions.every(
+				(value, index) => Object.values(value)[0] === Object.values(payload.productOptions[index])[0]
+			)
+	);
+	if (product) {
+		product.amount++;
+	} else {
+		state.cart.push(payload);
+	}
+	state.amountInCart++;
+	state.totalCost += payload.price;
+};
+
+const removeFromCart: CaseReducer<AStoreStateType, PayloadAction<number>> = (state, { payload }) => {
+	state.totalCost -= state.cart[payload].amount * state.cart[payload].price;
+	state.amountInCart -= state.cart[payload].amount;
+	state.cart.splice(payload, 1);
+};
+
+const decreaseAmount: CaseReducer<AStoreStateType, PayloadAction<number>> = (state, { payload }) => {
+	state.totalCost -= state.cart[payload].price;
+	if (state.cart[payload].amount > 1) {
+		state.cart[payload].amount--;
+		state.amountInCart--;
+	} else {
+		state.amountInCart--;
+		state.cart.splice(payload, 1);
+	}
+};
+
+const increaseAmount: CaseReducer<AStoreStateType, PayloadAction<number>> = (state, { payload }) => {
+	state.amountInCart++;
+	state.cart[payload].amount++;
+	state.totalCost += state.cart[payload].price;
+};
+
 export const { actions: aStoreActions, reducer: aStoreReducer } = createSlice({
 	name: NAME,
 	initialState: initialState,
@@ -77,5 +123,9 @@ export const { actions: aStoreActions, reducer: aStoreReducer } = createSlice({
 		successOwnDesign,
 		successProduct,
 		failure,
+		addToCart,
+		removeFromCart,
+		decreaseAmount,
+		increaseAmount,
 	},
 });

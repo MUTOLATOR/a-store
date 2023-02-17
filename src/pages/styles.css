@@ -96,6 +96,18 @@
 	filter: brightness(80%);
 }
 
+.cart-side-panel {
+	width: 600px;
+	max-width: 100%;
+}
+
+.cart-side-panel-total-cost {
+	display: flex;
+	gap: 20px;
+	justify-content: flex-end;
+	align-items: baseline;
+}
+
 @media (orientation: portrait) {
 	.homepage {
 		display: flex;

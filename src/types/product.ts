@@ -1,4 +1,6 @@
 export type ProductType = {
+	id: number | string;
+	preview: string;
 	images: string[];
 	title: string;
 	price: number;
@@ -32,4 +34,13 @@ export type OwnDesignType = {
 		availability: boolean;
 		subtitle: string;
 	}[];
+};
+
+export type CartType = {
+	productId: number | string;
+	productImg: string;
+	productName: string;
+	productOptions: {}[];
+	amount: number;
+	price: number;
 };

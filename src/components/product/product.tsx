@@ -6,8 +6,17 @@ import { Button } from "@alfalab/core-components/button";
 import React, { useEffect, useState } from "react";
 import "./product.css";
 import { ProductType } from "types/product";
+import { useAppDispatch } from "store";
+import { aStoreActions } from "store/a-store";
+
+type SelectType = {
+	key: string;
+	content: string;
+};
 
 export const Product = ({
+	id,
+	preview,
 	images,
 	title,
 	price,
@@ -23,10 +32,12 @@ export const Product = ({
 	const [sizeOptions, setSizeOptions] = useState([{ key: "", content: "" }]);
 	const [modelOptions, setModelOptions] = useState([{ key: "", content: "" }]);
 	const [stickerOptions, setStickerOptions] = useState([{ key: "", content: "" }]);
-	const [selectedColor, setSelectedColor] = useState<SelectProps["selected"]>({ key: "", content: "" });
-	const [selectedSize, setSelectedSize] = useState<SelectProps["selected"]>({ key: "", content: "" });
-	const [selectedModel, setSelectedModel] = useState<SelectProps["selected"]>({ key: "", content: "" });
-	const [selectedSticker, setSelectedSticker] = useState<SelectProps["selected"]>({ key: "", content: "" });
+	const [selectedColor, setSelectedColor] = useState({ key: "", content: "" });
+	const [selectedSize, setSelectedSize] = useState({ key: "", content: "" });
+	const [selectedModel, setSelectedModel] = useState({ key: "", content: "" });
+	const [selectedSticker, setSelectedSticker] = useState({ key: "", content: "" });
+
+	const dispatch = useAppDispatch();
 
 	useEffect(() => {
 		if (colors) {
@@ -79,16 +90,34 @@ export const Product = ({
 	};
 
 	const handleChangeColor: SelectProps["onChange"] = ({ selected }) => {
-		setSelectedColor(selected);
+		setSelectedColor(selected as SelectType);
 	};
 	const handleChangeSize: SelectProps["onChange"] = ({ selected }) => {
-		setSelectedSize(selected);
+		setSelectedSize(selected as SelectType);
 	};
 	const handleChangeModel: SelectProps["onChange"] = ({ selected }) => {
-		setSelectedModel(selected);
+		setSelectedModel(selected as SelectType);
 	};
 	const handleChangeSticker: SelectProps["onChange"] = ({ selected }) => {
-		setSelectedSticker(selected);
+		setSelectedSticker(selected as SelectType);
+	};
+
+	const product = {
+		productId: id,
+		productImg: preview,
+		productName: title,
+		productOptions: [
+			{ цвет: selectedColor.content },
+			{ размер: selectedSize.content },
+			{ модель: selectedModel.content },
+			{ "номер стикера": selectedSticker.content },
+		].filter((option) => Object.values(option)[0] !== ""),
+		amount: 1,
+		price: price,
+	};
+
+	const handleButtonClick = () => {
+		dispatch(aStoreActions.addToCart(product));
 	};
 
 	return (
@@ -175,7 +204,7 @@ export const Product = ({
 				<Typography.Text view="primary-large" weight="bold">
 					{availability ? "в наличии" : "закончились"}
 				</Typography.Text>
-				<Button disabled={!availability} view="primary">
+				<Button disabled={!availability} view="primary" onClick={handleButtonClick}>
 					В корзину
 				</Button>
 			</div>
