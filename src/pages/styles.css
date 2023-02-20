@@ -10,7 +10,7 @@
 
 .homepage-img {
 	width: 50vw;
-	height: 95vh;
+	height: calc(100vh - 36px);
 	object-fit: cover;
 	object-position: top;
 }
