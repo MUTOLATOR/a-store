@@ -207,6 +207,7 @@ export const Product = ({
 				<Button disabled={!availability} view="primary" onClick={handleButtonClick}>
 					В корзину
 				</Button>
+				<Gap size="xl" />
 			</div>
 		</div>
 	);

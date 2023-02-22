@@ -14,6 +14,8 @@ import { CartCard } from "components/cart-card";
 import { Gap } from "@alfalab/core-components/gap";
 import { Typography } from "@alfalab/core-components/typography";
 import { Amount } from "@alfalab/core-components/amount";
+import { CustomButton } from "@alfalab/core-components/custom-button";
+import { Link } from "react-router-dom";
 
 export const Page = ({ children }: PropsWithChildren) => {
 	const isLoading = useAppSelector(isLoadingSelector);
@@ -29,6 +31,7 @@ export const Page = ({ children }: PropsWithChildren) => {
 
 	const [isOpen, setIsOpen] = useState(false);
 	const handleModalOpen = () => setIsOpen(!isOpen);
+	const handleButtonClick = () => setIsOpen(false);
 
 	return (
 		<div className="page">
@@ -60,6 +63,12 @@ export const Page = ({ children }: PropsWithChildren) => {
 								</Typography.Text>
 								<Amount value={totalCost} minority={0} currency="RUB" bold="full" />
 							</div>
+							<Gap size="xl" />
+							<Link to="/cart " style={{ textDecoration: "none", color: "inherit" }}>
+								<CustomButton backgroundColor="black" block={true} onClick={handleButtonClick}>
+									Дальше
+								</CustomButton>
+							</Link>
 						</SidePanelResponsive.Content>
 					</SidePanelResponsive>
 				</>

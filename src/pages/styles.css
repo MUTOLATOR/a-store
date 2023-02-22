@@ -108,6 +108,13 @@
 	align-items: baseline;
 }
 
+.cartpage {
+	margin: auto;
+	padding: 10px;
+	max-width: 720px;
+	min-width: 300px;
+}
+
 @media (orientation: portrait) {
 	.homepage {
 		display: flex;
