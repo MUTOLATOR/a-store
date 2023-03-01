@@ -1,6 +1,6 @@
 import { AStoreStateType } from "./a-store";
 
-export const loadState = () => {
+export const loadState = (): { aStore: AStoreStateType } | undefined => {
 	try {
 		const serializedState = localStorage.getItem("state");
 		if (serializedState === null) {
