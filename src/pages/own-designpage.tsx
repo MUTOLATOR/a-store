@@ -27,6 +27,8 @@ export const OwnDesignpage = () => {
 		groups = data.groups;
 	}
 
+	const linkStyle = { textDecoration: "none", color: "inherit" };
+
 	return (
 		<Page>
 			<div className="own-designpage">
@@ -51,11 +53,7 @@ export const OwnDesignpage = () => {
 								</Typography.Text>
 								<div className="products">
 									{group.products.map((product) => (
-										<Link
-											to={`/own-design/${product.id}`}
-											style={{ textDecoration: "none", color: "inherit" }}
-											key={product.id}
-										>
+										<Link to={`/own-design/${product.id}`} style={linkStyle} key={product.id}>
 											<ProductCard
 												preview={product.preview}
 												title={product.title}

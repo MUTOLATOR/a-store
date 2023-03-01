@@ -11,9 +11,11 @@ export const Header = () => {
 
 	const handleDrawerOpen = () => setDrawerOpen(!drawerOpen);
 
+	const linkStyle = { textDecoration: "none", color: "inherit" };
+
 	return (
 		<div className="header">
-			<Link to="/" style={{ textDecoration: "none" }}>
+			<Link to="/" style={linkStyle}>
 				<Typography.Title tag="h1" className="home" color="accent" view="small">
 					A-Store
 				</Typography.Title>
@@ -25,17 +27,17 @@ export const Header = () => {
 				</Typography.Title>
 				<Drawer open={drawerOpen} className="drawer">
 					<Space>
-						<Link to="/made-in-alfa" style={{ textDecoration: "none" }}>
+						<Link to="/made-in-alfa" style={linkStyle}>
 							<Typography.Title tag="h3" className="drawer-menu" color="primary-inverted" font="system">
 								Сделано в Альфе
 							</Typography.Title>
 						</Link>
-						<Link to="/own-design" style={{ textDecoration: "none" }}>
+						<Link to="/own-design" style={linkStyle}>
 							<Typography.Title tag="h3" className="drawer-menu" color="primary-inverted" font="system">
 								Свой дизайн
 							</Typography.Title>
 						</Link>
-						<Link to="/contact-us" style={{ textDecoration: "none" }}>
+						<Link to="/contact-us" style={linkStyle}>
 							<Typography.Title tag="h3" className="drawer-menu" color="primary-inverted" font="system">
 								Контакты
 							</Typography.Title>

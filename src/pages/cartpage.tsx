@@ -19,15 +19,15 @@ export const Cartpage = () => {
 	const cost = useAppSelector(totalCostSelector);
 
 	const [fioValue, setFioValue] = useState("");
-	const [fioError, setFioError] = useState<boolean | string>(false);
+	const [fioError, setFioError] = useState("");
 	const [emailValue, setEmailValue] = useState("");
-	const [emailError, setEmailError] = useState<boolean | string>(false);
+	const [emailError, setEmailError] = useState("");
 	const [phoneValue, setPhoneValue] = useState("");
-	const [phoneError, setPhoneError] = useState<boolean | string>(false);
+	const [phoneError, setPhoneError] = useState("");
 	const [addressValue, setAddressValue] = useState("");
 	const [deliveryCost, setDeliveryCost] = useState("350");
 	const [checked, setChecked] = useState(false);
-	const [checkedError, setCheckedError] = useState<boolean | string>(false);
+	const [checkedError, setCheckedError] = useState("");
 	const [commentValue, setCommentValue] = useState("");
 
 	const regexp = /\S+@\S+\.\S+/;
@@ -56,17 +56,17 @@ export const Cartpage = () => {
 
 	const onFioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setFioValue(e.target.value);
-		setFioError(false);
+		setFioError("");
 	};
 
 	const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setEmailValue(e.target.value);
-		setEmailError(false);
+		setEmailError("");
 	};
 
 	const onPhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setPhoneValue(e.target.value);
-		setPhoneError(false);
+		setPhoneError("");
 	};
 
 	const onAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -79,7 +79,7 @@ export const Cartpage = () => {
 
 	const handleChangeCkecked = () => {
 		setChecked(!checked);
-		setCheckedError(false);
+		setCheckedError("");
 	};
 
 	const onCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {

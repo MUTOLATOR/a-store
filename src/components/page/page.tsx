@@ -33,6 +33,8 @@ export const Page = ({ children }: PropsWithChildren) => {
 	const handleModalOpen = () => setIsOpen(!isOpen);
 	const handleButtonClick = () => setIsOpen(false);
 
+	const linkStyle = { textDecoration: "none", color: "inherit" };
+
 	return (
 		<div className="page">
 			<Header />
@@ -64,7 +66,7 @@ export const Page = ({ children }: PropsWithChildren) => {
 								<Amount value={totalCost} minority={0} currency="RUB" bold="full" />
 							</div>
 							<Gap size="xl" />
-							<Link to="/cart " style={{ textDecoration: "none", color: "inherit" }}>
+							<Link to="/cart " style={linkStyle}>
 								<CustomButton backgroundColor="black" block={true} onClick={handleButtonClick}>
 									Дальше
 								</CustomButton>

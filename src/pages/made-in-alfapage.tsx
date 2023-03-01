@@ -27,6 +27,8 @@ export const MadeInAflapage = () => {
 		products = data.products;
 	}
 
+	const linkStyle = { textDecoration: "none", color: "inherit" };
+
 	return (
 		<Page>
 			<div className="made-in-alfapage">
@@ -41,11 +43,7 @@ export const MadeInAflapage = () => {
 				<Gap size="xl" />
 				<div className="products">
 					{products.map((product) => (
-						<Link
-							to={`/made-in-alfa/${product.id}`}
-							style={{ textDecoration: "none", color: "inherit" }}
-							key={product.id}
-						>
+						<Link to={`/made-in-alfa/${product.id}`} style={linkStyle} key={product.id}>
 							<ProductCard
 								preview={product.preview}
 								title={product.title}

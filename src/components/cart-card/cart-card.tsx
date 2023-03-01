@@ -37,12 +37,13 @@ export const CartCard = ({ product }: CartCardProductType) => {
 	const madeInAlfaProducts = useAppSelector(madeInAlfaProductsSelector);
 	const isMadeinAlfaProduct = madeInAlfaProducts.find((product) => product.id === productId);
 	const productLink = isMadeinAlfaProduct ? `/made-in-alfa/${productId}` : `/own-design/${productId}`;
+	const linkStyle = { textDecoration: "none", color: "inherit" };
 
 	return (
 		<div className="cart-card">
 			<img className="cart-card-img" src={productImg} alt={productName} />
 			<div className="cart-card-options">
-				<Link to={productLink} style={{ textDecoration: "none", color: "inherit" }}>
+				<Link to={productLink} style={linkStyle}>
 					<Typography.Text view="primary-large" weight="bold">
 						{productName}
 					</Typography.Text>
