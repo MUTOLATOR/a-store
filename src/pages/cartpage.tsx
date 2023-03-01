@@ -30,8 +30,8 @@ export const Cartpage = () => {
 	const [checkedError, setCheckedError] = useState<boolean | string>(false);
 	const [commentValue, setCommentValue] = useState("");
 
+	const regexp = /\S+@\S+\.\S+/;
 	const isValidEmail = (email: string) => {
-		const regexp = /\S+@\S+\.\S+/;
 		return regexp.test(email);
 	};
 

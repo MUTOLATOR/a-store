@@ -40,7 +40,7 @@ export type CartType = {
 	productId: number | string;
 	productImg: string;
 	productName: string;
-	productOptions: {}[];
+	productOptions: Array<Record<string, string | number | undefined>>;
 	amount: number;
 	price: number;
 };
