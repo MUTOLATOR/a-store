@@ -9,10 +9,12 @@ import { Checkbox } from "@alfalab/core-components/checkbox";
 import { Textarea } from "@alfalab/core-components/textarea";
 import { Page } from "components/page";
 import { useState } from "react";
-import { useAppSelector } from "store";
-import { amountInCartSelector, totalCostSelector } from "store/a-store";
+import { useAppDispatch, useAppSelector } from "store";
+import { amountInCartSelector, aStoreActions, totalCostSelector } from "store/a-store";
 import { Amount } from "@alfalab/core-components/amount";
 import { Divider } from "@alfalab/core-components/divider";
+import "./styles.css";
+import { useNavigate } from "react-router-dom";
 
 export const Cartpage = () => {
 	const amountInCart = useAppSelector(amountInCartSelector);
@@ -29,29 +31,14 @@ export const Cartpage = () => {
 	const [checked, setChecked] = useState(false);
 	const [checkedError, setCheckedError] = useState("");
 	const [commentValue, setCommentValue] = useState("");
+	const [isOrderMade, setIsOrderMade] = useState(false);
+
+	const navigate = useNavigate();
+	const dispatch = useAppDispatch();
 
 	const regexp = /\S+@\S+\.\S+/;
 	const isValidEmail = (email: string) => {
 		return regexp.test(email);
-	};
-
-	const validate = () => {
-		if (!fioValue) {
-			setFioError("Пожалуйста, заполните все обязательные поля");
-		}
-		if (!emailValue) {
-			setEmailError("Пожалуйста, заполните все обязательные поля");
-		} else if (!isValidEmail(emailValue)) {
-			setEmailError("Пожалуйста, укажите корректный email");
-		}
-		if (!phoneValue) {
-			setPhoneError("Пожалуйста, заполните все обязательные поля");
-		} else if (phoneValue.length !== 16) {
-			setPhoneError("Пожалуйста, укажите корректный телефон");
-		}
-		if (!checked) {
-			setCheckedError("Пожалуйста, согласитесь на обработку персональных данных");
-		}
 	};
 
 	const onFioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,6 +72,53 @@ export const Cartpage = () => {
 	const onCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 		setCommentValue(e.target.value);
 	};
+
+	const validate = () => {
+		if (!fioValue) {
+			setFioError("Пожалуйста, заполните все обязательные поля");
+		}
+		if (!emailValue) {
+			setEmailError("Пожалуйста, заполните все обязательные поля");
+		} else if (!isValidEmail(emailValue)) {
+			setEmailError("Пожалуйста, укажите корректный email");
+		}
+		if (!phoneValue) {
+			setPhoneError("Пожалуйста, заполните все обязательные поля");
+		} else if (phoneValue.length !== 16) {
+			setPhoneError("Пожалуйста, укажите корректный телефон");
+		}
+		if (!checked) {
+			setCheckedError("Пожалуйста, согласитесь на обработку персональных данных");
+		}
+		if (
+			!fioError &&
+			!emailError &&
+			!phoneError &&
+			!checkedError &&
+			fioValue &&
+			emailValue &&
+			phoneValue &&
+			checked
+		) {
+			// здесь должен быть axios.post, но апи не предоставляет возможности создавать заказ
+			setIsOrderMade(true);
+			dispatch(aStoreActions.clearCart());
+			setTimeout(() => {
+				setIsOrderMade(false);
+				navigate("/");
+			}, 3000);
+		}
+	};
+
+	if (isOrderMade) {
+		return (
+			<div className="cartpage">
+				<Typography.Title tag="h1" weight="bold" font="system">
+					Ваш заказ создан успешно
+				</Typography.Title>
+			</div>
+		);
+	}
 
 	return (
 		<Page>

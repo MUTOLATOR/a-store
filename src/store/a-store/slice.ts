@@ -112,6 +112,12 @@ const increaseAmount: CaseReducer<AStoreStateType, PayloadAction<number>> = (sta
 	state.totalCost += state.cart[payload].price;
 };
 
+const clearCart: CaseReducer<AStoreStateType> = (state) => {
+	state.cart = [];
+	state.amountInCart = 0;
+	state.totalCost = 0;
+};
+
 export const { actions: aStoreActions, reducer: aStoreReducer } = createSlice({
 	name: NAME,
 	initialState: initialState,
@@ -127,5 +133,6 @@ export const { actions: aStoreActions, reducer: aStoreReducer } = createSlice({
 		removeFromCart,
 		decreaseAmount,
 		increaseAmount,
+		clearCart,
 	},
 });
