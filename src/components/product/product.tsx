@@ -5,7 +5,7 @@ import { Select, SelectProps } from "@alfalab/core-components/select";
 import { Button } from "@alfalab/core-components/button";
 import React, { useEffect, useState } from "react";
 import "./product.css";
-import { ProductType } from "types/product";
+import { CartType, ProductType } from "types/product";
 import { useAppDispatch } from "store";
 import { aStoreActions } from "store/a-store";
 
@@ -102,7 +102,7 @@ export const Product = ({
 		setSelectedSticker(selected as SelectType);
 	};
 
-	const product = {
+	const product: CartType = {
 		productId: id,
 		productImg: preview,
 		productName: title,
@@ -115,6 +115,18 @@ export const Product = ({
 		amount: 1,
 		price: price,
 	};
+	if (selectedSticker.content !== "") {
+		product.stickerNumber = parseInt(selectedSticker.content);
+	}
+	if (selectedColor.content !== "") {
+		product.color = selectedColor.content;
+	}
+	if (selectedSize.content !== "") {
+		product.size = selectedColor.content;
+	}
+	if (selectedModel.content !== "") {
+		product.model = selectedColor.content;
+	}
 
 	const handleButtonClick = () => {
 		dispatch(aStoreActions.addToCart(product));

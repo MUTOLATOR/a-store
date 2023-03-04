@@ -43,4 +43,8 @@ export type CartType = {
 	productOptions: Array<Record<string, string | number | undefined>>;
 	amount: number;
 	price: number;
+	stickerNumber?: number;
+	color?: string;
+	size?: string;
+	model?: string;
 };

@@ -10,15 +10,17 @@ import { Textarea } from "@alfalab/core-components/textarea";
 import { Page } from "components/page";
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "store";
-import { amountInCartSelector, aStoreActions, totalCostSelector } from "store/a-store";
+import { amountInCartSelector, aStoreActions, cartSelector, totalCostSelector } from "store/a-store";
 import { Amount } from "@alfalab/core-components/amount";
 import { Divider } from "@alfalab/core-components/divider";
 import "./styles.css";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export const Cartpage = () => {
 	const amountInCart = useAppSelector(amountInCartSelector);
 	const cost = useAppSelector(totalCostSelector);
+	const cart = useAppSelector(cartSelector);
 
 	const [fioValue, setFioValue] = useState("");
 	const [fioError, setFioError] = useState("");
@@ -32,6 +34,7 @@ export const Cartpage = () => {
 	const [checkedError, setCheckedError] = useState("");
 	const [commentValue, setCommentValue] = useState("");
 	const [isOrderMade, setIsOrderMade] = useState(false);
+	const [orderError, setOrderError] = useState(false);
 
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
@@ -100,13 +103,50 @@ export const Cartpage = () => {
 			phoneValue &&
 			checked
 		) {
-			// здесь должен быть axios.post, но апи не предоставляет возможности создавать заказ
-			setIsOrderMade(true);
-			dispatch(aStoreActions.clearCart());
-			setTimeout(() => {
-				setIsOrderMade(false);
-				navigate("/");
-			}, 3000);
+			setOrderError(false);
+			let delivery;
+			if (deliveryCost === "350") {
+				delivery = "Доставка по России — 350₽";
+			} else if (deliveryCost === "300") {
+				delivery = "Курьером по Москве — 300₽";
+			} else {
+				delivery = "Самовывоз (пр-т Андропова, 18 корп. 3)";
+			}
+			const products = cart.map((product) => {
+				return {
+					id: product.productId,
+					totalPrice: product.price,
+					totalCount: product.amount,
+					sticketNumber: product.stickerNumber,
+					color: product.color,
+					size: product.size,
+					model: product.model,
+				};
+			});
+			const order = {
+				name: fioValue,
+				email: emailValue,
+				phone: phoneValue,
+				address: addressValue,
+				comment: commentValue,
+				deliveryType: delivery,
+				paymentType: "Банковская карта",
+				products: products,
+			};
+			console.log(order.products);
+			axios
+				.post("http://qa-games.ru/astore/create-order", order)
+				.then(() => {
+					setIsOrderMade(true);
+					dispatch(aStoreActions.clearCart());
+					setTimeout(() => {
+						setIsOrderMade(false);
+						navigate("/");
+					}, 3000);
+				})
+				.catch((e) => {
+					setOrderError(true);
+				});
 		}
 	};
 
@@ -226,6 +266,11 @@ export const Cartpage = () => {
 						<CustomButton backgroundColor="black" block={true} onClick={validate}>
 							Дальше
 						</CustomButton>
+						{orderError && (
+							<Typography.Text view="primary-large" weight="bold" color="accent">
+								При составление заказа произошла ошибка, попробуйте позже.
+							</Typography.Text>
+						)}
 					</>
 				) : (
 					<Typography.Title tag="h1" weight="bold" font="system">
