@@ -113,7 +113,7 @@ export const Cartpage = () => {
 				delivery = "Самовывоз (пр-т Андропова, 18 корп. 3)";
 			}
 			const products = cart.map((product) => {
-				return {
+				const productInCart: Record<string, string | number | undefined> = {
 					id: product.productId,
 					totalPrice: product.price,
 					totalCount: product.amount,
@@ -122,6 +122,12 @@ export const Cartpage = () => {
 					size: product.size,
 					model: product.model,
 				};
+				Object.keys(productInCart).forEach((key) => {
+					if (productInCart[key] === undefined) {
+						delete productInCart[key];
+					}
+				});
+				return productInCart;
 			});
 			const order = {
 				name: fioValue,
@@ -133,7 +139,6 @@ export const Cartpage = () => {
 				paymentType: "Банковская карта",
 				products: products,
 			};
-			console.log(order.products);
 			axios
 				.post("http://qa-games.ru/astore/create-order", order)
 				.then(() => {
