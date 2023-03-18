@@ -14,8 +14,9 @@ import { amountInCartSelector, aStoreActions, cartSelector, totalCostSelector } 
 import { Amount } from "@alfalab/core-components/amount";
 import { Divider } from "@alfalab/core-components/divider";
 import "./styles.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import emptyCartImg from "imgs/empty-cart.png";
 
 export const Cartpage = () => {
 	const amountInCart = useAppSelector(amountInCartSelector);
@@ -155,6 +156,8 @@ export const Cartpage = () => {
 		}
 	};
 
+	const linkStyle = { textDecoration: "none", color: "inherit" };
+
 	if (isOrderMade) {
 		return (
 			<div className="cartpage">
@@ -278,9 +281,17 @@ export const Cartpage = () => {
 						)}
 					</>
 				) : (
-					<Typography.Title tag="h1" weight="bold" font="system">
-						Ваша корзина пуста
-					</Typography.Title>
+					<div className="cartpage-empty">
+						<Typography.Title tag="h1" weight="bold" font="system">
+							Ваша корзина пуста
+						</Typography.Title>
+						<Gap size="xl" />
+						<img className="cartpage-empty-img" src={emptyCartImg} alt="пустая корзина" />
+						<Gap size="xl" />
+						<Link to="/" style={linkStyle}>
+							<CustomButton backgroundColor="black">Вернуться на главную страницу</CustomButton>
+						</Link>
+					</div>
 				)}
 			</div>
 		</Page>

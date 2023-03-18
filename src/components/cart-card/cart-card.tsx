@@ -49,7 +49,12 @@ export const CartCard = ({ product }: CartCardProductType) => {
 					</Typography.Text>
 				</Link>
 				{productOptions.map((option, index) => (
-					<Typography.Text key={index} view="secondary-medium" weight="bold" color="secondary">
+					<Typography.Text
+						key={`${option}: ${index}`}
+						view="secondary-medium"
+						weight="bold"
+						color="secondary"
+					>
 						{`${Object.keys(option)[0]}: ${Object.values(option)[0]}`}
 					</Typography.Text>
 				))}

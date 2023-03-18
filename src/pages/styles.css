@@ -115,12 +115,31 @@
 	min-width: 300px;
 }
 
+.cartpage-empty-img {
+	max-width: 100%;
+}
+
 .contacts {
 	margin: auto;
 	padding: 10px;
 	max-width: 1000px;
 	min-width: 300px;
 	white-space: pre-line;
+}
+
+.contacts-phone-and-email {
+	display: flex;
+	flex-direction: column;
+}
+
+.contacts-address {
+	display: flex;
+	flex-direction: column;
+}
+
+.contacts-work-hours {
+	display: flex;
+	flex-direction: column;
 }
 
 .contacts-map {

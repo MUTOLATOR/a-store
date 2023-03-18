@@ -23,12 +23,13 @@
 .cart-card-amount {
 	display: flex;
 	align-items: center;
-	width: 25%;
+	width: 20%;
 	gap: 10px;
 }
 
 .cart-card-price {
-	max-width: 10%;
+	width: 15%;
+	text-align: end;
 }
 
 .icon-button {
@@ -37,10 +38,17 @@
 
 .remove-button {
 	border: 1px solid rgba(0, 0, 0, 0.1);
-	max-width: 10%;
 }
 
 @media (orientation: portrait) and (max-width: 400px) {
+	.cart-card-options {
+		width: 35%;
+	}
+
+	.cart-card-amount {
+		width: 25%;
+	}
+
 	.remove-button {
 		visibility: hidden;
 	}
