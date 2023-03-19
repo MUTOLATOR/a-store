@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/a-store/static/css/main.56ba3bcb.css",
-    "main.js": "/a-store/static/js/main.a03af5d5.js",
+    "main.js": "/a-store/static/js/main.3574304a.js",
     "static/media/Made_in_Alfa.jpeg": "/a-store/static/media/Made_in_Alfa.a87b4ffc8d1a066f1a5c.jpeg",
     "static/media/Own_design.jpeg": "/a-store/static/media/Own_design.6935adcea289fc465b15.jpeg",
     "index.html": "/a-store/index.html",
     "main.56ba3bcb.css.map": "/a-store/static/css/main.56ba3bcb.css.map",
-    "main.a03af5d5.js.map": "/a-store/static/js/main.a03af5d5.js.map"
+    "main.3574304a.js.map": "/a-store/static/js/main.3574304a.js.map"
   },
   "entrypoints": [
     "static/css/main.56ba3bcb.css",
-    "static/js/main.a03af5d5.js"
+    "static/js/main.3574304a.js"
   ]
 }
