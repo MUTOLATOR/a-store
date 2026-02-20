@@ -7,35 +7,34 @@ import { CrossMIcon } from "@alfalab/icons/glyph/dist/CrossMIcon";
 import React from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "store";
-import { aStoreActions, cartSelector, madeInAlfaProductsSelector } from "store/a-store";
+import { aStoreActions, madeInAlfaProductsSelector } from "store/a-store";
 import { CartType } from "types/product";
 import "./cart-card.css";
 
 type CartCardProductType = {
 	product: CartType;
+	index: number;
 };
 
-export const CartCard = ({ product }: CartCardProductType) => {
+export const CartCard = ({ product, index }: CartCardProductType) => {
 	const { productId, productImg, productName, productOptions, amount, price } = product;
-	const cart = useAppSelector(cartSelector);
-	const productIndex = cart.indexOf(product);
 
 	const dispatch = useAppDispatch();
 
 	const handleRemoveClick = () => {
-		dispatch(aStoreActions.removeFromCart(productIndex));
+		dispatch(aStoreActions.removeFromCart(index));
 	};
 
 	const handleDecreaseClick = () => {
-		dispatch(aStoreActions.decreaseAmount(productIndex));
+		dispatch(aStoreActions.decreaseAmount(index));
 	};
 
 	const handeIncreaseClick = () => {
-		dispatch(aStoreActions.increaseAmount(productIndex));
+		dispatch(aStoreActions.increaseAmount(index));
 	};
 
 	const madeInAlfaProducts = useAppSelector(madeInAlfaProductsSelector);
-	const isMadeinAlfaProduct = madeInAlfaProducts.find((product) => product.id === productId);
+	const isMadeinAlfaProduct = madeInAlfaProducts.find((p) => p.id === productId);
 	const productLink = isMadeinAlfaProduct ? `/made-in-alfa/${productId}` : `/own-design/${productId}`;
 	const linkStyle = { textDecoration: "none", color: "inherit" };
 
@@ -48,9 +47,9 @@ export const CartCard = ({ product }: CartCardProductType) => {
 						{productName}
 					</Typography.Text>
 				</Link>
-				{productOptions.map((option, index) => (
+				{productOptions.map((option, idx) => (
 					<Typography.Text
-						key={`${option}: ${index}`}
+						key={`${Object.keys(option)[0]}-${idx}`}
 						view="secondary-medium"
 						weight="bold"
 						color="secondary"

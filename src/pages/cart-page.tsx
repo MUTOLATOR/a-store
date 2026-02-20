@@ -18,7 +18,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import emptyCartImg from "imgs/empty-cart.png";
 
-export const Cartpage = () => {
+export const CartPage = () => {
 	const amountInCart = useAppSelector(amountInCartSelector);
 	const cost = useAppSelector(totalCostSelector);
 	const cart = useAppSelector(cartSelector);
@@ -68,7 +68,7 @@ export const Cartpage = () => {
 		setDeliveryCost(payload?.value as string);
 	};
 
-	const handleChangeCkecked = () => {
+	const handleChangeChecked = () => {
 		setChecked(!checked);
 		setCheckedError("");
 	};
@@ -118,7 +118,7 @@ export const Cartpage = () => {
 					id: product.productId,
 					totalPrice: product.price,
 					totalCount: product.amount,
-					sticketNumber: product.stickerNumber,
+					stickerNumber: product.stickerNumber,
 					color: product.color,
 					size: product.size,
 					model: product.model,
@@ -230,7 +230,7 @@ export const Cartpage = () => {
 						</RadioGroup>
 						<Gap size="xl" />
 						<Checkbox
-							onChange={handleChangeCkecked}
+							onChange={handleChangeChecked}
 							checked={checked}
 							label="Согласен с политикой конфиденциальности и обработки персональных данных"
 							error={checkedError}
@@ -251,7 +251,7 @@ export const Cartpage = () => {
 						<Divider />
 						<Gap size="xs" />
 						<div>
-							<Typography.Text view="primary-large">Стоимость товаров в коризне:</Typography.Text>
+							<Typography.Text view="primary-large">Стоимость товаров в корзине:</Typography.Text>
 							<Gap direction="horizontal" size="xs" />
 							<Amount value={cost} minority={0} currency="RUB" bold="none" />
 						</div>
@@ -276,7 +276,7 @@ export const Cartpage = () => {
 						</CustomButton>
 						{orderError && (
 							<Typography.Text view="primary-large" weight="bold" color="accent">
-								При составление заказа произошла ошибка, попробуйте позже.
+								При составлении заказа произошла ошибка, попробуйте позже.
 							</Typography.Text>
 						)}
 					</>

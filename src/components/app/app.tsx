@@ -1,13 +1,13 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
-import { Homepage } from "pages/homepage";
-import { Cartpage } from "pages/cartpage";
-import { ContactUspage } from "pages/contact-uspage";
-import { MadeInAflapage } from "pages/made-in-alfapage";
-import { OwnDesignpage } from "pages/own-designpage";
-import { OwnDesignProductpage } from "pages/own-desigh-productpage";
-import { MadeInAflaProductpage } from "pages/made-in-alfa-productpage";
+import { Homepage } from "pages/home-page";
+import { Cartpage } from "pages/cart-page";
+import { ContactUspage } from "pages/contact-us-page";
+import { MadeInAlfapage } from "pages/made-in-alfa-page";
+import { OwnDesignpage } from "pages/own-design-page";
+import { OwnDesignProductpage } from "pages/own-design-product-page";
+import { MadeInAlfaProductpage } from "pages/made-in-alfa-product-page";
 
 export const App = () => (
 	<div className="app">
@@ -15,8 +15,8 @@ export const App = () => (
 			<Route path="/" element={<Homepage />} />
 			<Route path="/cart" element={<Cartpage />} />
 			<Route path="/contact-us" element={<ContactUspage />} />
-			<Route path="/made-in-alfa" element={<MadeInAflapage />} />
-			<Route path="/made-in-alfa/:productId" element={<MadeInAflaProductpage />} />
+			<Route path="/made-in-alfa" element={<MadeInAlfapage />} />
+			<Route path="/made-in-alfa/:productId" element={<MadeInAlfaProductpage />} />
 			<Route path="/own-design" element={<OwnDesignpage />} />
 			<Route path="/own-design/:productId" element={<OwnDesignProductpage />} />
 		</Routes>

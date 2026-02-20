@@ -102,40 +102,40 @@ export const Product = ({
 		setSelectedSticker(selected as SelectType);
 	};
 
-	const product: CartType = {
-		productId: id,
-		productImg: preview,
-		productName: title,
-		productOptions: [
-			{ цвет: selectedColor.content },
-			{ размер: selectedSize.content },
-			{ модель: selectedModel.content },
-			{ "номер стикера": selectedSticker.content },
-		].filter((option) => Object.values(option)[0] !== ""),
-		amount: 1,
-		price: price,
-	};
-	if (selectedSticker.content !== "") {
-		product.stickerNumber = parseInt(selectedSticker.content);
-	}
-	if (selectedColor.content !== "") {
-		product.color = selectedColor.content;
-	}
-	if (selectedSize.content !== "") {
-		product.size = selectedColor.content;
-	}
-	if (selectedModel.content !== "") {
-		product.model = selectedColor.content;
-	}
-
 	const handleButtonClick = () => {
+		const product: CartType = {
+			productId: id,
+			productImg: preview,
+			productName: title,
+			productOptions: [
+				{ цвет: selectedColor.content },
+				{ размер: selectedSize.content },
+				{ модель: selectedModel.content },
+				{ "номер стикера": selectedSticker.content },
+			].filter((option) => Object.values(option)[0] !== ""),
+			amount: 1,
+			price: price,
+		};
+		if (selectedSticker.content !== "") {
+			product.stickerNumber = parseInt(selectedSticker.content);
+		}
+		if (selectedColor.content !== "") {
+			product.color = selectedColor.content;
+		}
+		if (selectedSize.content !== "") {
+			product.size = selectedSize.content;
+		}
+		if (selectedModel.content !== "") {
+			product.model = selectedModel.content;
+		}
+
 		dispatch(aStoreActions.addToCart(product));
 	};
 
 	return (
 		<div className="productpage">
 			<div className="product-imgs">
-				<img className="product-big-img" src={images[currentImg]} alt={title} />
+				<img className="product-big-img" src={images[currentImg]} alt={`${title} - изображение ${currentImg + 1}`} />
 				<Gap size="xs" />
 				<div className="img-picker-block">
 					{images.map((img, index) => (
@@ -143,7 +143,7 @@ export const Product = ({
 							key={index}
 							className={index === currentImg ? "img-picker-active" : "img-picker"}
 							src={img}
-							alt=""
+							alt={`${title} - превью ${index + 1}`}
 							onClick={() => handleClick(index)}
 						/>
 					))}

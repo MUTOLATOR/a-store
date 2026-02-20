@@ -73,13 +73,20 @@ const failure: CaseReducer<AStoreStateType> = (state) => {
 };
 
 const addToCart: CaseReducer<AStoreStateType, PayloadAction<CartType>> = (state, { payload }) => {
+	const areOptionsEqual = (options1: any[], options2: any[]) => {
+		if (options1.length !== options2.length) return false;
+		return options1.every((opt1) => {
+			const key1 = Object.keys(opt1)[0];
+			const val1 = opt1[key1];
+			const opt2 = options2.find((o) => Object.keys(o)[0] === key1);
+			return opt2 && opt2[key1] === val1;
+		});
+	};
+
 	const product = state.cart.find(
-		(product) =>
-			product.productId === payload.productId &&
-			product.productOptions.every(
-				(value, index) => Object.values(value)[0] === Object.values(payload.productOptions[index])[0]
-			)
+		(p) => p.productId === payload.productId && areOptionsEqual(p.productOptions, payload.productOptions)
 	);
+
 	if (product) {
 		product.amount++;
 	} else {
