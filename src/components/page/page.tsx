@@ -54,7 +54,7 @@ export const Page = ({ children }: PropsWithChildren) => {
 						<SidePanelResponsive.Content>
 							<Divider />
 							{cart.map((product, index) => (
-								<CartCard key={index} product={product} />
+								<CartCard key={index} product={product} index={index} />
 							))}
 							<Gap size="xl" />
 							<Divider />
@@ -66,7 +66,7 @@ export const Page = ({ children }: PropsWithChildren) => {
 								<Amount value={totalCost} minority={0} currency="RUB" bold="full" />
 							</div>
 							<Gap size="xl" />
-							<Link to="/cart " style={linkStyle}>
+							<Link to="/cart" style={linkStyle}>
 								<CustomButton backgroundColor="black" block={true} onClick={handleButtonClick}>
 									Дальше
 								</CustomButton>

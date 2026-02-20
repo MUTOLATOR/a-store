@@ -1,14 +1,14 @@
-import { useParams } from "react-router-dom";
+import { Page } from "components/page";
 import "./styles.css";
 import data from "data/products.json";
-import { Page } from "components/page";
+import { useParams } from "react-router-dom";
 import { Product } from "components/product";
 import { ProductType } from "types/product";
 import { useAppDispatch, useAppSelector } from "store";
 import { useCallback, useEffect } from "react";
 import { aStoreActions, currentProductSelector, hasErrorSelector } from "store/a-store";
 
-export const OwnDesignProductpage = () => {
+export const MadeInAlfaProductpage = () => {
 	const { productId } = useParams();
 
 	const dispatch = useAppDispatch();
@@ -24,10 +24,14 @@ export const OwnDesignProductpage = () => {
 
 	let product = useAppSelector(currentProductSelector);
 	if (hasError) {
-		product = data.customProducts.find((product) => product.id === parseInt(productId as string)) as ProductType;
+		product = data.products.find((product) => product.id === parseInt(productId as string)) as ProductType;
 	}
 
-	const { id, preview, images, title, price, description, availability, colors, sizes, stickerNumbers } = product;
+	if (!product || !product.id) {
+		return <Page children={null} />;
+	}
+
+	const { id, preview, images, title, price, description, availability, colors, sizes, models } = product;
 
 	return (
 		<Page>
@@ -41,7 +45,7 @@ export const OwnDesignProductpage = () => {
 				availability={availability}
 				colors={colors}
 				sizes={sizes}
-				stickerNumbers={stickerNumbers}
+				models={models}
 			/>
 		</Page>
 	);
